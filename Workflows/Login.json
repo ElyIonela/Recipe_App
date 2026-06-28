@@ -1,0 +1,743 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-validator",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-validator",
+        "port": "port-val-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-val-false-to-400",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-validator",
+        "port": "out_false",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-400",
+        "port": "port-400-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-val-true-to-query-users",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-validator",
+        "port": "out_true",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-users",
+        "port": "port-qu-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-query-users-to-router",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-users",
+        "port": "port-qu-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-router",
+        "port": "port-router-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-router-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-router",
+        "port": "port-router-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-route",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-route",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-success-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-route",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-login-ok",
+        "port": "port-ok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp7g/auth/login"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "auth/login",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 10,
+              "registeredEndpoint": "/api/v1/NTp7g/auth/login",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 270,
+        "y": 40
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract email and password"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 210
+      }
+    },
+    {
+      "id": "data-validator",
+      "type": "app.DataValidator",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataValidator": {
+          "extra": {
+            "arrayItemType": "Object",
+            "data": "{{mapper}}",
+            "rootType": "Object",
+            "schema": {
+              "properties": {
+                "email": {
+                  "minLength": 5,
+                  "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+                  "type": "string"
+                },
+                "password": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ],
+              "type": "object"
+            },
+            "variable": "validated"
+          }
+        },
+        "description": {
+          "text": "{{mapper}}"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/data-validator.svg"
+        },
+        "label": {
+          "text": "Data Validator"
+        },
+        "variable": {
+          "text": "validated",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-val-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_true",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_false",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 140,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 405
+      }
+    },
+    {
+      "id": "output-400",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Validation error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": false, \"error\": \"Valid email and password are required.\" }",
+            "responseType": "json",
+            "statusCode": 400
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-400-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-400-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 420,
+        "y": 637.5
+      }
+    },
+    {
+      "id": "query-users",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "email",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{mapper.email}}"
+              }
+            ],
+            "limit": 1,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 368,
+            "variable": "found_user"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Users by Email"
+        },
+        "variable": {
+          "text": "found_user",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qu-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qu-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 625
+      }
+    },
+    {
+      "id": "code-router",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar email = String(m.email || '').toLowerCase().trim();\nvar password = String(m.password || '');\n\nvar userData = variables.found_user || {};\nvar rows = userData.rows || [];\n\nif (rows.length === 0) {\n  // Generic error to prevent user enumeration\n  var result = {\n    route: 'error',\n    statusCode: 401,\n    response: { success: false, error: 'Invalid email or password.' }\n  };\n  result;\n} else {\n  var user = rows[0];\n  var storedHash = String(user.password_hash || '');\n\n  // Verify password against bcrypt hash\n  var passwordValid = bcryptVerify(password, storedHash);\n\n  if (!passwordValid) {\n    var result = {\n      route: 'error',\n      statusCode: 401,\n      response: { success: false, error: 'Invalid email or password.' }\n    };\n    result;\n  } else {\n    var secret = variables.secrets.my_jwt_secret;\n    if (!secret) {\n      var result = {\n        route: 'error',\n        statusCode: 500,\n        response: { success: false, error: 'Server configuration error.' }\n      };\n      result;\n    } else {\n      var now = Date.now();\n      var iat = Math.floor(now / 1000);\n      var exp = iat + 31536000; // 365 days\n\n      var userId = String(user._id || '');\n      var userName = String(user.name || '');\n      var userRole = String(user.role || 'user');\n\n      var token = jwtSign({\n        sub: userId,\n        email: email,\n        name: userName,\n        role: userRole,\n        iss: 'recipe-app',\n        iat: iat,\n        exp: exp\n      }, secret);\n\n      var result = {\n        route: 'success',\n        response: {\n          success: true,\n          token: token,\n          user: {\n            id: userId,\n            name: userName,\n            email: email,\n            role: userRole\n          }\n        }\n      };\n      result;\n    }\n  }\n}",
+            "language": "javascript",
+            "name": "Verify Password & Generate JWT",
+            "saved": 0,
+            "variable": "router"
+          }
+        },
+        "description": {
+          "text": "var m = variables.mapper || {};\nvar email = String(m.email || '').toLowerCase().trim();\nvar password = String(m.password || '');\n\nvar userData = variables.found_user || {};\nvar rows = userData.rows || [];\n\nif (rows.length === 0) {\n  // Generic error to prevent user enumeration\n  var result = {\n    route: 'error',\n    statusCode: 401,\n    response: { success: false, error: 'Invalid email or password.' }\n  };\n  result;\n} else {\n  var user = rows[0];\n  var storedHash = String(user.password_hash || '');\n\n  // Verify password against bcrypt hash\n  var passwordValid = bcryptVerify(password, storedHash);\n\n  if (!passwordValid) {\n    var result = {\n      route: 'error',\n      statusCode: 401,\n      response: { success: false, error: 'Invalid email or password.' }\n    };\n    result;\n  } else {\n    var secret = variables.secrets.my_jwt_secret;\n    if (!secret) {\n      var result = {\n        route: 'error',\n        statusCode: 500,\n        response: { success: false, error: 'Server configuration error.' }\n      };\n      result;\n    } else {\n      var now = Date.now();\n      var iat = Math.floor(now / 1000);\n      var exp = iat + 31536000; // 365 days\n\n      var userId = String(user._id || '');\n      var userName = String(user.name || '');\n      var userRole = String(user.role || 'user');\n\n      var token = jwtSign({\n        sub: userId,\n        email: email,\n        name: userName,\n        role: userRole,\n        iss: 'recipe-app',\n        iat: iat,\n        exp: exp\n      }, secret);\n\n      var result = {\n        route: 'success',\n        response: {\n          success: true,\n          token: token,\n          user: {\n            id: userId,\n            name: userName,\n            email: email,\n            role: userRole\n          }\n        }\n      };\n      result;\n    }\n  }\n}"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "router",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 87
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-router-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-router-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 820
+      }
+    },
+    {
+      "id": "cond-route",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{router.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{router.route}}",
+                "condition_operator": "==",
+                "condition_value": "success",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "SUCCESS"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 1015
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Error response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{router.response}}",
+            "responseType": "json",
+            "statusCode": "{{router.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 1175
+      }
+    },
+    {
+      "id": "output-login-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Login successful"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{router.response}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 420,
+        "y": 1175
+      }
+    }
+  ]
+}

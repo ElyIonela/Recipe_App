@@ -1,0 +1,676 @@
+{
+  "cells": [
+    {
+      "id": "f8abbdbc-2da8-4dd8-9c5c-63e2f3f3e73b",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "name",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "email",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "password_hash",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              },
+              {
+                "columnId": "role",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "4"
+              },
+              {
+                "columnId": "created_at",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "5"
+              },
+              {
+                "columnId": "92de75c1-909f-4762-9020-5e59ec37f17e",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "6"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 368,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Users"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 113.33334350585938,
+        "y": 130.5
+      }
+    },
+    {
+      "id": "c59c19d2-ca86-44fb-b89b-4fa5bd5bf2b7",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "title",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "description",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "ingredients",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              },
+              {
+                "columnId": "steps",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "4"
+              },
+              {
+                "columnId": "cook_time",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "5"
+              },
+              {
+                "columnId": "prep_time",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "6"
+              },
+              {
+                "columnId": "servings",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "7"
+              },
+              {
+                "columnId": "difficulty",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "8"
+              },
+              {
+                "columnId": "category",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "9"
+              },
+              {
+                "columnId": "image_url",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "10"
+              },
+              {
+                "columnId": "tags",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "11"
+              },
+              {
+                "columnId": "submitted_by",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "12"
+              },
+              {
+                "columnId": "status",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "13"
+              },
+              {
+                "columnId": "rejection_reason",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "14"
+              },
+              {
+                "columnId": "avg_rating",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "15"
+              },
+              {
+                "columnId": "rating_count",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "16"
+              },
+              {
+                "columnId": "created_at",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "17"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Recipes"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 376,
+        "y": 128
+      }
+    },
+    {
+      "id": "e9fc64b0-4110-4673-a8fa-455944efdb04",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "user_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "rating",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              },
+              {
+                "columnId": "created_at",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "4"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 366,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Rating"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 640,
+        "y": 128
+      }
+    },
+    {
+      "id": "3fff25a9-b05c-45ef-a57c-cef8c9abc506",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "user_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "created_at",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 365,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Favorites"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 896,
+        "y": 128
+      }
+    },
+    {
+      "id": "70198281-bdab-4326-8ffb-0db1ebdcca72",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "user_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "user_name",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              },
+              {
+                "columnId": "text",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "4"
+              },
+              {
+                "columnId": "image_url",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "5"
+              },
+              {
+                "columnId": "created_at",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "6"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 364,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Comments"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 104,
+        "y": 272
+      }
+    },
+    {
+      "id": "6c49464b-8622-4299-9ae5-e7b17d060ab9",
+      "type": "app.DataSources",
+      "attrs": {
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "0"
+              },
+              {
+                "columnId": "name",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "1"
+              },
+              {
+                "columnId": "icon",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "2"
+              },
+              {
+                "columnId": "sort_order",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "3"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 363,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Categories"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "0b0adc03-b211-4286-a0d0-d346dcf1a2da",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "18f78ab1-44c7-4f54-8223-9c185ab8a0f4",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 384,
+        "y": 264
+      }
+    }
+  ]
+}

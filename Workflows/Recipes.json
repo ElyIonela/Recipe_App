@@ -1,0 +1,3463 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-auth",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-auth",
+        "port": "port-auth-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-auth-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-auth",
+        "port": "port-auth-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-action",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-list",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-list",
+        "port": "port-ql-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-get",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_3",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-get",
+        "port": "port-qg-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-search",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_4",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-search",
+        "port": "port-qs-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-random",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_5",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-random",
+        "port": "port-qr-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-submit",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_6",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-submit",
+        "port": "port-ws-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-my",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_7",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-my-recipes",
+        "port": "port-qmy-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-approve",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_8",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-approve",
+        "port": "port-wa-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-reject",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_9",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-reject",
+        "port": "port-wr-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-edit",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_10",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-edit",
+        "port": "port-we-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-delete",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_11",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-delete",
+        "port": "port-wd-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-pending",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_12",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-pending",
+        "port": "port-qp-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-edit-own",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_13",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-edit-own",
+        "port": "port-weo-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-delete-own",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_14",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-delete-own",
+        "port": "port-wdo-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-ql-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-list",
+        "port": "port-ql-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-list",
+        "port": "port-fl-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fl-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-list",
+        "port": "port-fl-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-list",
+        "port": "port-ol-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qg-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-get",
+        "port": "port-qg-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-get",
+        "port": "port-fg-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fg-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-get",
+        "port": "port-fg-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-get",
+        "port": "port-og-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qs-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-search",
+        "port": "port-qs-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-search",
+        "port": "port-fs-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fs-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-search",
+        "port": "port-fs-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-search",
+        "port": "port-os-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qr-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-random",
+        "port": "port-qr-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-random",
+        "port": "port-fr-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fr-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-random",
+        "port": "port-fr-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-random",
+        "port": "port-or-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-ws-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-submit",
+        "port": "port-ws-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-submit",
+        "port": "port-fsb-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fsb-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-submit",
+        "port": "port-fsb-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-submit",
+        "port": "port-osb-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qmy-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-my-recipes",
+        "port": "port-qmy-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-my",
+        "port": "port-fmy-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fmy-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-my",
+        "port": "port-fmy-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-my",
+        "port": "port-omy-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wa-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-approve",
+        "port": "port-wa-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-approve",
+        "port": "port-oa-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wr-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-reject",
+        "port": "port-wr-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-reject",
+        "port": "port-orj-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-we-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-edit",
+        "port": "port-we-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-edit",
+        "port": "port-oe-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wd-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-delete",
+        "port": "port-wd-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-delete",
+        "port": "port-od-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qp-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-pending",
+        "port": "port-qp-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-pending",
+        "port": "port-fp-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fp-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-pending",
+        "port": "port-fp-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-pending",
+        "port": "port-op-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-weo-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-edit-own",
+        "port": "port-weo-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-edit",
+        "port": "port-oe-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wdo-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-delete-own",
+        "port": "port-wdo-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-delete",
+        "port": "port-od-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp70/recipes"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "recipes",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 60,
+              "registeredEndpoint": "/api/v1/NTp70/recipes",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 2290,
+        "y": 40
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"token\": \"{{token}}\",\n  \"action\": \"{{action}}\",\n  \"recipe_id\": \"{{recipe_id}}\",\n  \"category\": \"{{category}}\",\n  \"query\": \"{{query}}\",\n  \"title\": \"{{title}}\",\n  \"description\": \"{{description}}\",\n  \"cook_time\": \"{{cook_time}}\",\n  \"prep_time\": \"{{prep_time}}\",\n  \"servings\": \"{{servings}}\",\n  \"difficulty\": \"{{difficulty}}\",\n  \"image_url\": \"{{image_url}}\",\n  \"tags\": \"{{tags}}\",\n  \"rejection_reason\": \"{{rejection_reason}}\",\n  \"submit_category\": \"{{submit_category}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract all recipe fields"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2250,
+        "y": 210
+      }
+    },
+    {
+      "id": "code-auth",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar token = String(m.token || '').trim();\nvar action = String(m.action || '').toLowerCase().trim();\nvar recipeId = String(m.recipe_id || '').trim();\n\nvar publicActions = ['list', 'get', 'search', 'random'];\nvar userActions = ['submit', 'my_recipes', 'edit', 'delete'];\nvar adminActions = ['approve', 'reject', 'pending'];\nvar allActions = publicActions.concat(userActions).concat(adminActions);\n\nif (allActions.indexOf(action) === -1) {\n  var r = { route:'error', statusCode:400, response:{ success:false, error:'Invalid action. Must be one of: '+allActions.join(', ')+'.' } }; r;\n} else if (publicActions.indexOf(action) !== -1) {\n  if (action === 'get' && !recipeId) {\n    var r = { route:'error', statusCode:400, response:{ success:false, error:'recipe_id is required for get.' } }; r;\n  } else if (action === 'search' && !String(m.query||'').trim()) {\n    var r = { route:'error', statusCode:400, response:{ success:false, error:'query is required for search.' } }; r;\n  } else {\n    var r = { route:action, category:String(m.category||'').trim(), query:String(m.query||'').trim(), recipe_id:recipeId }; r;\n  }\n} else {\n  if (!token) {\n    var r = { route:'error', statusCode:401, response:{ success:false, error:'Authentication required.' } }; r;\n  } else {\n    try {\n      var secret = variables.secrets.my_jwt_secret;\n      var decoded = jwtVerify(token, secret);\n      var userId = String(decoded.sub||'');\n      var userName = String(decoded.name||'');\n      var userRole = String(decoded.role||'user');\n      if (!userId) {\n        var r = { route:'error', statusCode:401, response:{ success:false, error:'Invalid token.' } }; r;\n      } else if (adminActions.indexOf(action) !== -1 && userRole !== 'admin') {\n        var r = { route:'error', statusCode:403, response:{ success:false, error:'Admin access required.' } }; r;\n      } else if ((action==='approve'||action==='reject'||action==='edit'||action==='delete') && !recipeId) {\n        var r = { route:'error', statusCode:400, response:{ success:false, error:'recipe_id is required for '+action+'.' } }; r;\n      } else if (action === 'pending') {\n        var r = { route:'pending', user_id:userId, user_role:userRole }; r;\n      } else if (action === 'submit') {\n        var title = String(m.title||'').trim();\n        var desc = String(m.description||'').trim();\n        var ingredients = String(variables.ingredients||'').trim();\n        var steps = String(variables.steps||'').trim();\n        if (!title||!ingredients||!steps) {\n          var r = { route:'error', statusCode:400, response:{ success:false, error:'title, ingredients, and steps are required.' } }; r;\n        } else {\n          var r = {\n            route:'submit', user_id:userId, user_name:userName, user_role:userRole,\n            title:title, description:desc, ingredients:ingredients, steps:steps,\n            cook_time:Number(m.cook_time)||0, prep_time:Number(m.prep_time)||0,\n            servings:Number(m.servings)||1, difficulty:String(m.difficulty||'medium').trim(),\n            submit_category:String(m.submit_category||'dinner').trim(),\n            image_url:String(m.image_url||'').trim(), tags:String(m.tags||'').trim(),\n            created_at:new Date().toISOString()\n          }; r;\n        }\n      } else if (action === 'reject') {\n        var reason = String(m.rejection_reason||'').trim();\n        if (!reason) reason = 'No reason provided';\n        var r = { route:'reject', recipe_id:recipeId, rejection_reason:reason, user_id:userId, user_role:userRole }; r;\n      } else if (action === 'edit') {\n        var r = {\n          route: userRole === 'admin' ? 'edit' : 'edit_own',\n          recipe_id:recipeId, user_id:userId, user_role:userRole,\n          title:String(m.title||'').trim(), description:String(m.description||'').trim(),\n          ingredients:String(variables.ingredients||'').trim(), steps:String(variables.steps||'').trim(),\n          cook_time:String(m.cook_time||'').trim(), prep_time:String(m.prep_time||'').trim(),\n          servings:String(m.servings||'').trim(), difficulty:String(m.difficulty||'').trim(),\n          submit_category:String(m.submit_category||'').trim(),\n          image_url:String(m.image_url||'').trim(), tags:String(m.tags||'').trim()\n        }; r;\n      } else if (action === 'delete') {\n        var r = {\n          route: userRole === 'admin' ? 'delete' : 'delete_own',\n          recipe_id:recipeId, user_id:userId, user_role:userRole\n        }; r;\n      } else {\n        var r = { route:action, user_id:userId, user_name:userName, user_role:userRole, recipe_id:recipeId }; r;\n      }\n    } catch(e) {\n      var r = { route:'error', statusCode:401, response:{ success:false, error:'Invalid or expired token.' } }; r;\n    }\n  }\n}",
+            "language": "javascript",
+            "name": "Auth & Route Logic",
+            "saved": 0,
+            "variable": "auth"
+          }
+        },
+        "description": {
+          "text": "JWT verify, validate, route (ownership split)"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "auth",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 70
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-auth-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-auth-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2250,
+        "y": 405
+      }
+    },
+    {
+      "id": "cond-action",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_10": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "edit",
+                "logical_operators": "and"
+              }
+            ],
+            "out_11": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "delete",
+                "logical_operators": "and"
+              }
+            ],
+            "out_12": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "pending",
+                "logical_operators": "and"
+              }
+            ],
+            "out_13": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "edit_own",
+                "logical_operators": "and"
+              }
+            ],
+            "out_14": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "delete_own",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "list",
+                "logical_operators": "and"
+              }
+            ],
+            "out_3": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "get",
+                "logical_operators": "and"
+              }
+            ],
+            "out_4": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "search",
+                "logical_operators": "and"
+              }
+            ],
+            "out_5": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "random",
+                "logical_operators": "and"
+              }
+            ],
+            "out_6": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "submit",
+                "logical_operators": "and"
+              }
+            ],
+            "out_7": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "my_recipes",
+                "logical_operators": "and"
+              }
+            ],
+            "out_8": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "approve",
+                "logical_operators": "and"
+              }
+            ],
+            "out_9": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "reject",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route Action"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "LIST"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_3",
+            "attrs": {
+              "portLabel": {
+                "text": "GET"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_4",
+            "attrs": {
+              "portLabel": {
+                "text": "SEARCH"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_5",
+            "attrs": {
+              "portLabel": {
+                "text": "RANDOM"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_6",
+            "attrs": {
+              "portLabel": {
+                "text": "SUBMIT"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_7",
+            "attrs": {
+              "portLabel": {
+                "text": "MY RECIPES"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_8",
+            "attrs": {
+              "portLabel": {
+                "text": "APPROVE"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_9",
+            "attrs": {
+              "portLabel": {
+                "text": "REJECT"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_10",
+            "attrs": {
+              "portLabel": {
+                "text": "EDIT (admin)"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_11",
+            "attrs": {
+              "portLabel": {
+                "text": "DELETE (admin)"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_12",
+            "attrs": {
+              "portLabel": {
+                "text": "PENDING"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_13",
+            "attrs": {
+              "portLabel": {
+                "text": "EDIT OWN"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_14",
+            "attrs": {
+              "portLabel": {
+                "text": "DELETE OWN"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 2250,
+        "y": 600
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Error response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{auth.response}}",
+            "responseType": "json",
+            "statusCode": "{{auth.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 772.5
+      }
+    },
+    {
+      "id": "query-list",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "status",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "approved"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [
+              {
+                "columnId": "avg_rating",
+                "direction": "desc"
+              }
+            ],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "listData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Approved Recipes"
+        },
+        "variable": {
+          "text": "listData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ql-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ql-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 4460,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-list",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.listData || {};\nvar rows = data.rows || [];\nvar cat = (variables.auth || {}).category || '';\nif (cat) {\n  rows = rows.filter(function(r) { return String(r.category||'').toLowerCase() === cat.toLowerCase(); });\n}\nvar recipes = rows.map(function(r) {\n  return {\n    id: r._id||'', title: r.title||'', description: r.description||'',\n    cook_time: Number(r.cook_time)||0, prep_time: Number(r.prep_time)||0,\n    difficulty: r.difficulty||'', category: r.category||'',\n    image_url: r.image_url||'', avg_rating: Number(r.avg_rating)||0,\n    rating_count: Number(r.rating_count)||0, submitted_by: r.submitted_by||''\n  };\n});\nvar result = { success:true, data:recipes, total:recipes.length };\nresult;\n",
+            "language": "javascript",
+            "name": "Format List",
+            "saved": 0,
+            "variable": "fmtList"
+          }
+        },
+        "description": {
+          "text": "var data = variables.listData || {};\nvar rows = data.rows || [];\nvar cat = (variables.auth || {}).category || '';\nif (cat) {\n  rows = rows.filter(function(r) { return String(r.category||'').toLowerCase() === cat.toLowerCase(); });\n}\nvar recipes = rows.map(function(r) {\n  return {\n    id: r._id||'', title: r.title||'', description: r.description||'',\n    cook_time: Number(r.cook_time)||0, prep_time: Number(r.prep_time)||0,\n    difficulty: r.difficulty||'', category: r.category||'',\n    image_url: r.image_url||'', avg_rating: Number(r.avg_rating)||0,\n    rating_count: Number(r.rating_count)||0, submitted_by: r.submitted_by||''\n  };\n});\nvar result = { success:true, data:recipes, total:recipes.length };\nresult;"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtList",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 95.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fl-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fl-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2590,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-list",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Recipe list"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtList}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ol-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ol-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 2590,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-get",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              },
+              {
+                "columnId": "status",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "approved"
+              }
+            ],
+            "limit": 1,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "getData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Get Recipe by ID"
+        },
+        "variable": {
+          "text": "getData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 95.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qg-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qg-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-get",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.getData || {};\nvar rows = data.rows || [];\nif (rows.length === 0) { var result = { success:false, error:'Recipe not found.', _status:404 }; result; } else { var r = rows[0]; var result = { success:true, data: { id:r._id||'', title:r.title||'', description:r.description||'', ingredients:r.ingredients||'', steps:r.steps||'', cook_time:Number(r.cook_time)||0, prep_time:Number(r.prep_time)||0, servings:Number(r.servings)||1, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', tags:r.tags||'', submitted_by:r.submitted_by||'', avg_rating:Number(r.avg_rating)||0, rating_count:Number(r.rating_count)||0, created_at:r.created_at||'' } }; result; }",
+            "language": "javascript",
+            "name": "Format Get",
+            "saved": 0,
+            "variable": "fmtGet"
+          }
+        },
+        "description": {
+          "text": "var data = variables.getData || {};\nvar rows = data.rows || [];\nif (rows.length === 0) { var result = { success:false, error:'Recipe not found.', _status:404 }; result; } else { var r = rows[0]; var result = { success:true, data: { id:r._id||'', title:r.title||'', description:r.description||'', ingredients:r.ingredients||'', steps:r.steps||'', cook_time:Number(r.cook_time)||0, prep_time:Number(r.prep_time)||0, servings:Number(r.servings)||1, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', tags:r.tags||'', submitted_by:r.submitted_by||'', avg_rating:Number(r.avg_rating)||0, rating_count:Number(r.rating_count)||0, created_at:r.created_at||'' } }; result; }"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtGet",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 87
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fg-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fg-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-get",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Single recipe"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtGet}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-og-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-og-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 1230,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-search",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [],
+            "limit": 20,
+            "naturalQuery": "{{auth.query}}",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "{{auth.query}}",
+            "queryMode": "semantic",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.5,
+            "sort": [],
+            "topK": 20,
+            "var_datasource": 367,
+            "variable": "searchData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Semantic Search"
+        },
+        "query": {
+          "text": "{{auth.query}}"
+        },
+        "variable": {
+          "text": "searchData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qs-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qs-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-search",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.searchData || {};\nvar rows = data.rows || [];\nrows = rows.filter(function(r) { return String(r.status||'') === 'approved'; });\nvar recipes = rows.map(function(r) { return { id:r._id||'', title:r.title||'', description:r.description||'', cook_time:Number(r.cook_time)||0, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', avg_rating:Number(r.avg_rating)||0, rating_count:Number(r.rating_count)||0 }; });\nvar result = { success:true, data:recipes, total:recipes.length }; result;",
+            "language": "javascript",
+            "name": "Format Search",
+            "saved": 0,
+            "variable": "fmtSearch"
+          }
+        },
+        "description": {
+          "text": "Filter approved, format"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtSearch",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fs-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fs-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 890,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-search",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Search results"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtSearch}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-os-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-os-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 1570,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-random",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "status",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "approved"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "randomPool"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query All Approved"
+        },
+        "variable": {
+          "text": "randomPool",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qr-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qr-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1060,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-random",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.randomPool || {};\nvar rows = data.rows || [];\nif (rows.length === 0) { var result = { success:false, error:'No recipes available.' }; result; } else { var idx = Math.floor(Math.random() * rows.length); var r = rows[idx]; var result = { success:true, data: { id:r._id||'', title:r.title||'', description:r.description||'', ingredients:r.ingredients||'', steps:r.steps||'', cook_time:Number(r.cook_time)||0, prep_time:Number(r.prep_time)||0, servings:Number(r.servings)||1, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', tags:r.tags||'', avg_rating:Number(r.avg_rating)||0, rating_count:Number(r.rating_count)||0, created_at:r.created_at||'' } }; result; }",
+            "language": "javascript",
+            "name": "Pick Random",
+            "saved": 0,
+            "variable": "fmtRandom"
+          }
+        },
+        "description": {
+          "text": "Pick random recipe"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtRandom",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fr-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fr-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1230,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-random",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Random recipe"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtRandom}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-or-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-or-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 1910,
+        "y": 1150
+      }
+    },
+    {
+      "id": "write-submit",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "title",
+                "columnName": "title",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.title}}"
+              },
+              {
+                "columnId": "description",
+                "columnName": "description",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.description}}"
+              },
+              {
+                "columnId": "ingredients",
+                "columnName": "ingredients",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.ingredients}}"
+              },
+              {
+                "columnId": "steps",
+                "columnName": "steps",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.steps}}"
+              },
+              {
+                "columnId": "cook_time",
+                "columnName": "cook_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.cook_time}}"
+              },
+              {
+                "columnId": "prep_time",
+                "columnName": "prep_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.prep_time}}"
+              },
+              {
+                "columnId": "servings",
+                "columnName": "servings",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.servings}}"
+              },
+              {
+                "columnId": "difficulty",
+                "columnName": "difficulty",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.difficulty}}"
+              },
+              {
+                "columnId": "category",
+                "columnName": "category",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.submit_category}}"
+              },
+              {
+                "columnId": "image_url",
+                "columnName": "image_url",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.image_url}}"
+              },
+              {
+                "columnId": "tags",
+                "columnName": "tags",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.tags}}"
+              },
+              {
+                "columnId": "submitted_by",
+                "columnName": "submitted_by",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.user_id}}"
+              },
+              {
+                "columnId": "status",
+                "columnName": "status",
+                "columnType": "text",
+                "required": true,
+                "value": "pending"
+              },
+              {
+                "columnId": "rejection_reason",
+                "columnName": "rejection_reason",
+                "columnType": "text",
+                "required": false,
+                "value": ""
+              },
+              {
+                "columnId": "avg_rating",
+                "columnName": "avg_rating",
+                "columnType": "number",
+                "required": false,
+                "value": "0"
+              },
+              {
+                "columnId": "rating_count",
+                "columnName": "rating_count",
+                "columnType": "number",
+                "required": false,
+                "value": "0"
+              },
+              {
+                "columnId": "created_at",
+                "columnName": "created_at",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.created_at}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "insert",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "newRecipe",
+            "where": []
+          }
+        },
+        "description": {
+          "text": "Insert → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Submit Recipe"
+        },
+        "variable": {
+          "text": "newRecipe",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ws-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ws-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1400,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-submit",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.newRecipe || {};\nvar row = data.row || data;\nvar result = { success:true, message:'Recipe submitted for review.', data: { id:row._id||'', title:row.title||'', status:'pending' } }; result;",
+            "language": "javascript",
+            "name": "Format Submit",
+            "saved": 0,
+            "variable": "fmtSubmit"
+          }
+        },
+        "description": {
+          "text": "Format submit response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtSubmit",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fsb-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fsb-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1570,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-submit",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Recipe submitted"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtSubmit}}",
+            "responseType": "json",
+            "statusCode": 201
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-osb-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-osb-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 2250,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-my-recipes",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "submitted_by",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.user_id}}"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [
+              {
+                "columnId": "created_at",
+                "direction": "desc"
+              }
+            ],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "myData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query My Recipes"
+        },
+        "variable": {
+          "text": "myData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 87
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qmy-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qmy-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1740,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-my",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.myData || {};\nvar rows = data.rows || [];\nvar recipes = rows.map(function(r) { return { id:r._id||'', title:r.title||'', description:r.description||'', status:r.status||'', rejection_reason:r.rejection_reason||'', cook_time:Number(r.cook_time)||0, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', avg_rating:Number(r.avg_rating)||0, created_at:r.created_at||'' }; });\nvar result = { success:true, data:recipes, total:recipes.length }; result;",
+            "language": "javascript",
+            "name": "Format My Recipes",
+            "saved": 0,
+            "variable": "fmtMy"
+          }
+        },
+        "description": {
+          "text": "Format my recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtMy",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 78
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fmy-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fmy-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1910,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-my",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "My recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtMy}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-omy-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-omy-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 2930,
+        "y": 1150
+      }
+    },
+    {
+      "id": "write-approve",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "status",
+                "columnName": "status",
+                "columnType": "text",
+                "required": true,
+                "value": "approved"
+              },
+              {
+                "columnId": "rejection_reason",
+                "columnName": "rejection_reason",
+                "columnType": "text",
+                "required": false,
+                "value": ""
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "approveResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Approve Recipe"
+        },
+        "variable": {
+          "text": "approveResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 146.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wa-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wa-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2080,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-approve",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Approved"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Recipe approved.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-oa-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-oa-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 2250,
+        "y": 967.5
+      }
+    },
+    {
+      "id": "write-reject",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "status",
+                "columnName": "status",
+                "columnType": "text",
+                "required": true,
+                "value": "rejected"
+              },
+              {
+                "columnId": "rejection_reason",
+                "columnName": "rejection_reason",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.rejection_reason}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "rejectResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Reject Recipe"
+        },
+        "variable": {
+          "text": "rejectResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 138
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wr-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wr-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2420,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-reject",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Rejected"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Recipe rejected.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-orj-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-orj-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 2930,
+        "y": 967.5
+      }
+    },
+    {
+      "id": "write-edit",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "title",
+                "columnName": "title",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.title}}"
+              },
+              {
+                "columnId": "description",
+                "columnName": "description",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.description}}"
+              },
+              {
+                "columnId": "ingredients",
+                "columnName": "ingredients",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.ingredients}}"
+              },
+              {
+                "columnId": "steps",
+                "columnName": "steps",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.steps}}"
+              },
+              {
+                "columnId": "cook_time",
+                "columnName": "cook_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.cook_time}}"
+              },
+              {
+                "columnId": "prep_time",
+                "columnName": "prep_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.prep_time}}"
+              },
+              {
+                "columnId": "servings",
+                "columnName": "servings",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.servings}}"
+              },
+              {
+                "columnId": "difficulty",
+                "columnName": "difficulty",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.difficulty}}"
+              },
+              {
+                "columnId": "category",
+                "columnName": "category",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.submit_category}}"
+              },
+              {
+                "columnId": "image_url",
+                "columnName": "image_url",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.image_url}}"
+              },
+              {
+                "columnId": "tags",
+                "columnName": "tags",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.tags}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "editResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Edit Recipe (Admin)"
+        },
+        "variable": {
+          "text": "editResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-we-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-we-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 2760,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-edit",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Recipe updated"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Recipe updated.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-oe-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-oe-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 3270,
+        "y": 967.5
+      }
+    },
+    {
+      "id": "write-delete",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "delete",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "deleteResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Delete → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Delete Recipe (Admin)"
+        },
+        "variable": {
+          "text": "deleteResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 138
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wd-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wd-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 3100,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-delete",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "description": {
+          "text": "Recipe deleted"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Recipe deleted.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-od-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-od-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 3950,
+        "y": 967.5
+      }
+    },
+    {
+      "id": "query-pending",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "status",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "pending"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [
+              {
+                "columnId": "created_at",
+                "direction": "desc"
+              }
+            ],
+            "topK": 5,
+            "var_datasource": 367,
+            "variable": "pendingData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Pending"
+        },
+        "variable": {
+          "text": "pendingData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qp-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qp-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 3440,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-pending",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.pendingData || {};\nvar rows = data.rows || [];\nvar recipes = rows.map(function(r) { return { id:r._id||'', title:r.title||'', description:r.description||'', ingredients:r.ingredients||'', steps:r.steps||'', cook_time:Number(r.cook_time)||0, prep_time:Number(r.prep_time)||0, servings:Number(r.servings)||1, difficulty:r.difficulty||'', category:r.category||'', image_url:r.image_url||'', tags:r.tags||'', status:r.status||'', submitted_by:r.submitted_by||'', created_at:r.created_at||'' }; });\nvar result = { success:true, data:recipes, total:recipes.length }; result;",
+            "language": "javascript",
+            "name": "Format Pending",
+            "saved": 0,
+            "variable": "fmtPending"
+          }
+        },
+        "description": {
+          "text": "Format pending list"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtPending",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 110
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fp-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fp-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 3610,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-pending",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "description": {
+          "text": "Pending recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtPending}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-op-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-op-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 3270,
+        "y": 1150
+      }
+    },
+    {
+      "id": "write-edit-own",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "title",
+                "columnName": "title",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.title}}"
+              },
+              {
+                "columnId": "description",
+                "columnName": "description",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.description}}"
+              },
+              {
+                "columnId": "ingredients",
+                "columnName": "ingredients",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.ingredients}}"
+              },
+              {
+                "columnId": "steps",
+                "columnName": "steps",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.steps}}"
+              },
+              {
+                "columnId": "cook_time",
+                "columnName": "cook_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.cook_time}}"
+              },
+              {
+                "columnId": "prep_time",
+                "columnName": "prep_time",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.prep_time}}"
+              },
+              {
+                "columnId": "servings",
+                "columnName": "servings",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.servings}}"
+              },
+              {
+                "columnId": "difficulty",
+                "columnName": "difficulty",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.difficulty}}"
+              },
+              {
+                "columnId": "category",
+                "columnName": "category",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.submit_category}}"
+              },
+              {
+                "columnId": "image_url",
+                "columnName": "image_url",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.image_url}}"
+              },
+              {
+                "columnId": "tags",
+                "columnName": "tags",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.tags}}"
+              },
+              {
+                "columnId": "status",
+                "columnName": "status",
+                "columnType": "text",
+                "required": false,
+                "value": "pending"
+              },
+              {
+                "columnId": "rejection_reason",
+                "columnName": "rejection_reason",
+                "columnType": "text",
+                "required": false,
+                "value": ""
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "editOwnResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              },
+              {
+                "column": "submitted_by",
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.user_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Edit Own Recipe"
+        },
+        "variable": {
+          "text": "editOwnResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 146.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-weo-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-weo-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 3780,
+        "y": 760
+      }
+    },
+    {
+      "id": "write-delete-own",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "delete",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "deleteOwnResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              },
+              {
+                "column": "submitted_by",
+                "columnId": "submitted_by",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.user_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Delete → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Delete Own Recipe"
+        },
+        "variable": {
+          "text": "deleteOwnResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 163.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wdo-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wdo-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 4120,
+        "y": 760
+      }
+    }
+  ]
+}

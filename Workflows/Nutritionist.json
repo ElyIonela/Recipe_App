@@ -1,0 +1,574 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-code",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-validate",
+        "port": "port-val-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-code-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-validate",
+        "port": "port-val-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-valid",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-valid",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-ok-to-model",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-valid",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "model-nutrition",
+        "port": "port-model-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-model-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "model-nutrition",
+        "port": "port-model-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-ok",
+        "port": "port-ok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp7K/recipe-nutrition"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "recipe-nutrition",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 30,
+              "registeredEndpoint": "/api/v1/NTp7K/recipe-nutrition",
+              "requireAuth": false,
+              "timeout": 60
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 270,
+        "y": 40
+      }
+    },
+    {
+      "id": "code-validate",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar title = String(m.title || '').trim();\nvar ingredients = String(m.ingredients || '').trim();\nvar servings = String(m.servings || '1');\n\nif (!title || !ingredients) {\n  var r = { valid:'no', statusCode:400, response:{ success:false, error:'title and ingredients are required.' } }; r;\n} else {\n  var prompt = 'Analyze the following recipe and provide detailed nutritional information per serving.\\n\\n';\n  prompt += 'Recipe: ' + title + '\\n';\n  prompt += 'Servings: ' + servings + '\\n';\n  prompt += 'Ingredients: ' + ingredients + '\\n\\n';\n  prompt += 'Please provide:\\n';\n  prompt += '1. Total calories per serving\\n';\n  prompt += '2. Macronutrients (protein, carbs, fat) in grams\\n';\n  prompt += '3. Key micronutrients\\n';\n  prompt += '4. Health notes (allergens, dietary info)\\n';\n  prompt += '5. A brief health rating (1-10)\\n\\n';\n  prompt += 'Format your response clearly with sections.';\n  var r = { valid:'yes', prompt:prompt }; r;\n}",
+            "language": "javascript",
+            "name": "Build Prompt",
+            "saved": 0,
+            "variable": "validated"
+          }
+        },
+        "description": {
+          "text": "var m = variables.mapper || {};\nvar title = String(m.title || '').trim();\nvar ingredients = String(m.ingredients || '').trim();\nvar servings = String(m.servings || '1');\n\nif (!title || !ingredients) {\n  var r = { valid:'no', statusCode:400, response:{ success:false, error:'title and ingredients are required.' } }; r;\n} else {\n  var prompt = 'Analyze the following recipe and provide detailed nutritional information per serving.\\n\\n';\n  prompt += 'Recipe: ' + title + '\\n';\n  prompt += 'Servings: ' + servings + '\\n';\n  prompt += 'Ingredients: ' + ingredients + '\\n\\n';\n  prompt += 'Please provide:\\n';\n  prompt += '1. Total calories per serving\\n';\n  prompt += '2. Macronutrients (protein, carbs, fat) in grams\\n';\n  prompt += '3. Key micronutrients\\n';\n  prompt += '4. Health notes (allergens, dietary info)\\n';\n  prompt += '5. A brief health rating (1-10)\\n\\n';\n  prompt += 'Format your response clearly with sections.';\n  var r = { valid:'yes', prompt:prompt }; r;\n}"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "validated",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-val-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-val-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 405
+      }
+    },
+    {
+      "id": "cond-valid",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{validated.valid}}",
+                "condition_operator": "==",
+                "condition_value": "no",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{validated.valid}}",
+                "condition_operator": "==",
+                "condition_value": "yes",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Valid?"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "OK"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 600
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{validated.response}}",
+            "responseType": "json",
+            "statusCode": "{{validated.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 772.5
+      }
+    },
+    {
+      "id": "model-nutrition",
+      "type": "app.Model",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/llm/glm-icon.svg"
+        },
+        "instructions": {
+          "text": "You are a friendly nutritionist. Analyze the recipe and provide:\n\n1. First, the nutritional data per serving:\nCALORIES: [number] kcal per serving\nPROTEIN: [number]g\nCARBS: [number]g\nFAT: [number]g\nFIBER: [number]g\nSUGAR: [number]g\n\n2. Then key micronutrients with amounts.\n\n3. Then allergen warnings if any.\n\n4. Then a health rating out of 10.\n\n5. Finally, write 2-3 sentences of helpful dietary advice about this dish — who it's good for, what to pair it with, or how to make it healthier.\n\nBe specific with numbers. Be informative but concise.\n"
+        },
+        "provider": {
+          "extra": {
+            "allowContext": false,
+            "icon": "./assets/images/llm/glm-icon.svg",
+            "id": 59,
+            "images": "",
+            "instructions": "You are a friendly nutritionist. Analyze the recipe and provide:\n\n1. First, the nutritional data per serving:\nCALORIES: [number] kcal per serving\nPROTEIN: [number]g\nCARBS: [number]g\nFAT: [number]g\nFIBER: [number]g\nSUGAR: [number]g\n\n2. Then key micronutrients with amounts.\n\n3. Then allergen warnings if any.\n\n4. Then a health rating out of 10.\n\n5. Finally, write 2-3 sentences of helpful dietary advice about this dish — who it's good for, what to pair it with, or how to make it healthier.\n\nBe specific with numbers. Be informative but concise.\n",
+            "maxTokens": 4100,
+            "name": "GLM 5.2",
+            "prompt": "{{validated.prompt}}",
+            "sessionId": "",
+            "sessionMemoryEnabled": true,
+            "sessionMemoryTable": 369,
+            "streamToChat": false,
+            "temperature": 0.3,
+            "variable": "aiResponse"
+          },
+          "text": "GLM 5.2"
+        },
+        "variable": {
+          "text": "aiResponse",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-model-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-model-out",
+            "attrs": {
+              "portLabel": {
+                "text": "out"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 420,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "description": {
+          "text": "{{aiResponse}}"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{aiResponse}}",
+            "responseType": "text",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 230,
+        "y": 955
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"title\": \"{{title}}\",\n  \"ingredients\": \"{{ingredients}}\",\n  \"servings\": \"{{servings}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract recipe data"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 232,
+        "y": 200
+      }
+    }
+  ]
+}

@@ -1,0 +1,1532 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-auth",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-auth",
+        "port": "port-auth-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-auth-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-auth",
+        "port": "port-auth-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-action",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-rate",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-existing-rating",
+        "port": "port-qer-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-get",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_3",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-my-rating",
+        "port": "port-qmr-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qer-to-code-upsert",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-existing-rating",
+        "port": "port-qer-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-upsert-logic",
+        "port": "port-ul-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-ul-to-cond-upsert",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-upsert-logic",
+        "port": "port-ul-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-upsert",
+        "port": "port-cu-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cu-insert",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-upsert",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-insert-rating",
+        "port": "port-wir-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cu-update",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-upsert",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-update-rating",
+        "port": "port-wur-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wir-to-recalc",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-insert-rating",
+        "port": "port-wir-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-all-ratings",
+        "port": "port-qar-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wur-to-recalc",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-update-rating",
+        "port": "port-wur-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-all-ratings",
+        "port": "port-qar-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qar-to-calc",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-all-ratings",
+        "port": "port-qar-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-calc-avg",
+        "port": "port-ca-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-ca-to-write-recipe",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-calc-avg",
+        "port": "port-ca-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-update-recipe",
+        "port": "port-wrc-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wrc-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-update-recipe",
+        "port": "port-wrc-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-rate-ok",
+        "port": "port-rok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qmr-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-my-rating",
+        "port": "port-qmr-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-format-my",
+        "port": "port-fm-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fm-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-format-my",
+        "port": "port-fm-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-my-ok",
+        "port": "port-mok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp75/ratings"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "ratings",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 60,
+              "registeredEndpoint": "/api/v1/NTp75/ratings",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 420,
+        "y": 40
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"token\": \"{{token}}\",\n  \"action\": \"{{action}}\",\n  \"recipe_id\": \"{{recipe_id}}\",\n  \"rating\": \"{{rating}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract token, action, recipe_id, rating"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 210
+      }
+    },
+    {
+      "id": "code-auth",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar token = String(m.token || '').trim();\nvar action = String(m.action || '').toLowerCase().trim();\nvar recipeId = String(m.recipe_id || '').trim();\nvar ratingVal = Number(m.rating);\n\nvar validActions = ['rate', 'get_my_rating'];\n\nif (!token) {\n  var result = {\n    route: 'error',\n    statusCode: 401,\n    response: { success: false, error: 'Authentication required. Please provide a valid token.' }\n  };\n  result;\n} else if (validActions.indexOf(action) === -1) {\n  var result = {\n    route: 'error',\n    statusCode: 400,\n    response: { success: false, error: 'Invalid action. Must be one of: rate, get_my_rating.' }\n  };\n  result;\n} else {\n  try {\n    var secret = variables.secrets.my_jwt_secret;\n    var decoded = jwtVerify(token, secret);\n    var userId = String(decoded.sub || '');\n\n    if (!userId) {\n      var result = {\n        route: 'error',\n        statusCode: 401,\n        response: { success: false, error: 'Invalid token.' }\n      };\n      result;\n    } else if (!recipeId) {\n      var result = {\n        route: 'error',\n        statusCode: 400,\n        response: { success: false, error: 'recipe_id is required.' }\n      };\n      result;\n    } else if (action === 'rate') {\n      if (isNaN(ratingVal) || ratingVal < 1 || ratingVal > 5 || Math.floor(ratingVal) !== ratingVal) {\n        var result = {\n          route: 'error',\n          statusCode: 400,\n          response: { success: false, error: 'rating must be an integer between 1 and 5.' }\n        };\n        result;\n      } else {\n        var result = {\n          route: 'rate',\n          user_id: userId,\n          recipe_id: recipeId,\n          rating: ratingVal,\n          created_at: new Date().toISOString()\n        };\n        result;\n      }\n    } else {\n      var result = {\n        route: 'get_my_rating',\n        user_id: userId,\n        recipe_id: recipeId\n      };\n      result;\n    }\n  } catch (e) {\n    var result = {\n      route: 'error',\n      statusCode: 401,\n      response: { success: false, error: 'Invalid or expired token.' }\n    };\n    result;\n  }\n}",
+            "language": "javascript",
+            "name": "Verify JWT & Validate Action",
+            "saved": 0,
+            "variable": "auth"
+          }
+        },
+        "description": {
+          "text": "Verify JWT, validate action, rating value"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "auth",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 70
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-auth-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-auth-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 405
+      }
+    },
+    {
+      "id": "cond-action",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "rate",
+                "logical_operators": "and"
+              }
+            ],
+            "out_3": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "get_my_rating",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route Action"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "RATE"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_3",
+            "attrs": {
+              "portLabel": {
+                "text": "GET MY"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 600
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Auth/validation error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{auth.response}}",
+            "responseType": "json",
+            "statusCode": "{{auth.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 772.5
+      }
+    },
+    {
+      "id": "query-existing-rating",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "user_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.user_id}}"
+              },
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ],
+            "limit": 1,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 366,
+            "variable": "existingRating"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Check Existing Rating"
+        },
+        "variable": {
+          "text": "existingRating",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 155
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qer-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qer-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-upsert-logic",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.existingRating || {};\nvar rows = data.rows || [];\n\nif (rows.length > 0) {\n  var result = {\n    mode: 'update',\n    existing_id: String(rows[0]._id || '')\n  };\n  result;\n} else {\n  var result = { mode: 'insert' };\n  result;\n}",
+            "language": "javascript",
+            "name": "Insert or Update?",
+            "saved": 0,
+            "variable": "upsertLogic"
+          }
+        },
+        "description": {
+          "text": "var data = variables.existingRating || {};\nvar rows = data.rows || [];\n\nif (rows.length > 0) {\n  var result = {\n    mode: 'update',\n    existing_id: String(rows[0]._id || '')\n  };\n  result;\n} else {\n  var result = { mode: 'insert' };\n  result;\n}"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "upsertLogic",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ul-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ul-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 955
+      }
+    },
+    {
+      "id": "cond-upsert",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{upsertLogic.mode}}",
+                "condition_operator": "==",
+                "condition_value": "insert",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{upsertLogic.mode}}",
+                "condition_operator": "==",
+                "condition_value": "update",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Insert or Update?"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cu-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "INSERT"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "UPDATE"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 1155
+      }
+    },
+    {
+      "id": "write-insert-rating",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "recipe_id",
+                "columnName": "recipe_id",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.recipe_id}}"
+              },
+              {
+                "columnId": "user_id",
+                "columnName": "user_id",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.user_id}}"
+              },
+              {
+                "columnId": "rating",
+                "columnName": "rating",
+                "columnType": "number",
+                "required": true,
+                "value": "{{auth.rating}}"
+              },
+              {
+                "columnId": "created_at",
+                "columnName": "created_at",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.created_at}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 366,
+            "datasourceName": "Rating",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "insert",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "savedRating",
+            "where": []
+          }
+        },
+        "description": {
+          "text": "Insert → Rating"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Insert Rating"
+        },
+        "variable": {
+          "text": "savedRating",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wir-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wir-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 190,
+        "y": 1320
+      }
+    },
+    {
+      "id": "write-update-rating",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "rating",
+                "columnName": "rating",
+                "columnType": "number",
+                "required": true,
+                "value": "{{auth.rating}}"
+              },
+              {
+                "columnId": "created_at",
+                "columnName": "created_at",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.created_at}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 366,
+            "datasourceName": "Rating",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "savedRating",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{upsertLogic.existing_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Rating"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Update Rating"
+        },
+        "variable": {
+          "text": "savedRating",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wur-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wur-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 570,
+        "y": 1320
+      }
+    },
+    {
+      "id": "query-all-ratings",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ],
+            "limit": 10000,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 366,
+            "variable": "allRatings"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query All Ratings for Recipe"
+        },
+        "variable": {
+          "text": "allRatings",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qar-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qar-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 1515
+      }
+    },
+    {
+      "id": "code-calc-avg",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.allRatings || {};\nvar rows = data.rows || [];\n\nvar count = rows.length;\nvar sum = 0;\nfor (var i = 0; i < rows.length; i++) {\n  sum += Number(rows[i].rating) || 0;\n}\n\nvar avg = count > 0 ? Math.round((sum / count) * 10) / 10 : 0;\n\nvar result = {\n  avg_rating: avg,\n  rating_count: count\n};\nresult;",
+            "language": "javascript",
+            "name": "Calculate Average Rating",
+            "saved": 0,
+            "variable": "calcAvg"
+          }
+        },
+        "description": {
+          "text": "Calculate avg_rating and rating_count"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "calcAvg",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 100
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ca-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ca-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 1710
+      }
+    },
+    {
+      "id": "write-update-recipe",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "avg_rating",
+                "columnName": "avg_rating",
+                "columnType": "number",
+                "required": true,
+                "value": "{{calcAvg.avg_rating}}"
+              },
+              {
+                "columnId": "rating_count",
+                "columnName": "rating_count",
+                "columnType": "number",
+                "required": true,
+                "value": "{{calcAvg.rating_count}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "updatedRecipe",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Update Recipe Avg"
+        },
+        "variable": {
+          "text": "updatedRecipe",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 146.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wrc-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wrc-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 1905
+      }
+    },
+    {
+      "id": "output-rate-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Rating saved"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Rating saved.\", \"avg_rating\": {{calcAvg.avg_rating}}, \"rating_count\": {{calcAvg.rating_count}} }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-rok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-rok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 2100
+      }
+    },
+    {
+      "id": "query-my-rating",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "user_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.user_id}}"
+              },
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ],
+            "limit": 1,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 366,
+            "variable": "myRating"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query My Rating"
+        },
+        "variable": {
+          "text": "myRating",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qmr-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qmr-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-format-my",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.myRating || {};\nvar rows = data.rows || [];\n\nif (rows.length > 0) {\n  var row = rows[0];\n  var result = {\n    success: true,\n    data: {\n      id: row._id || '',\n      recipe_id: row.recipe_id || '',\n      rating: Number(row.rating) || 0,\n      created_at: row.created_at || ''\n    }\n  };\n  result;\n} else {\n  var result = {\n    success: true,\n    data: null,\n    message: 'You have not rated this recipe yet.'\n  };\n  result;\n}",
+            "language": "javascript",
+            "name": "Format My Rating",
+            "saved": 0,
+            "variable": "myResult"
+          }
+        },
+        "description": {
+          "text": "Format get_my_rating response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "myResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 100
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fm-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fm-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-my-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "My rating response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{myResult}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 1150
+      }
+    }
+  ]
+}

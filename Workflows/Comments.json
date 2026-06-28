@@ -1,0 +1,1445 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-auth",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-auth",
+        "port": "port-auth-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-auth-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-auth",
+        "port": "port-auth-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-action",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-add",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-add-comment",
+        "port": "port-wac-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-list",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_3",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-list-comments",
+        "port": "port-qlc-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-delete",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_4",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-find-comment",
+        "port": "port-qfc-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wac-to-ok",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-add-comment",
+        "port": "port-wac-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-format-add",
+        "port": "port-fma-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fma-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-format-add",
+        "port": "port-fma-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-add-ok",
+        "port": "port-aok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qlc-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-list-comments",
+        "port": "port-qlc-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-format-list",
+        "port": "port-fmt-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fmt-to-ok",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-format-list",
+        "port": "port-fmt-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-list-ok",
+        "port": "port-lok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qfc-to-code-del",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-find-comment",
+        "port": "port-qfc-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-check-owner",
+        "port": "port-co-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-co-to-cond-del",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-check-owner",
+        "port": "port-co-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-delete",
+        "port": "port-cd-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cd-denied",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-delete",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-del-error",
+        "port": "port-de-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cd-ok",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-delete",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-delete-comment",
+        "port": "port-wdc-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wdc-to-ok",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-delete-comment",
+        "port": "port-wdc-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-del-ok",
+        "port": "port-dok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp7V/comments"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "comments",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 60,
+              "registeredEndpoint": "/api/v1/NTp7V/comments",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 590,
+        "y": 40
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"token\": \"{{token}}\",\n  \"action\": \"{{action}}\",\n  \"recipe_id\": \"{{recipe_id}}\",\n  \"comment_id\": \"{{comment_id}}\",\n  \"text\": \"{{text}}\",\n  \"image_url\": \"{{image_url}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract token, action, recipe_id, comment_id, text, image_url"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 210
+      }
+    },
+    {
+      "id": "code-auth",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar token = String(m.token || '').trim();\nvar action = String(m.action || '').toLowerCase().trim();\nvar recipeId = String(m.recipe_id || '').trim();\nvar commentId = String(m.comment_id || '').trim();\nvar text = String(m.text || '').trim();\nvar imageUrl = String(m.image_url || '').trim();\n\nvar validActions = ['add', 'list', 'delete'];\n\n// list does not require auth — anyone can read comments\nif (action === 'list') {\n  if (!recipeId) {\n    var result = {\n      route: 'error',\n      statusCode: 400,\n      response: { success: false, error: 'recipe_id is required for list action.' }\n    };\n    result;\n  } else {\n    var result = {\n      route: 'list',\n      recipe_id: recipeId\n    };\n    result;\n  }\n} else if (!token) {\n  var result = {\n    route: 'error',\n    statusCode: 401,\n    response: { success: false, error: 'Authentication required. Please provide a valid token.' }\n  };\n  result;\n} else if (validActions.indexOf(action) === -1) {\n  var result = {\n    route: 'error',\n    statusCode: 400,\n    response: { success: false, error: 'Invalid action. Must be one of: add, list, delete.' }\n  };\n  result;\n} else {\n  try {\n    var secret = variables.secrets.my_jwt_secret;\n    var decoded = jwtVerify(token, secret);\n    var userId = String(decoded.sub || '');\n    var userName = String(decoded.name || '');\n    var userRole = String(decoded.role || 'user');\n\n    if (!userId) {\n      var result = {\n        route: 'error',\n        statusCode: 401,\n        response: { success: false, error: 'Invalid token.' }\n      };\n      result;\n    } else if (action === 'add') {\n      if (!recipeId) {\n        var result = {\n          route: 'error',\n          statusCode: 400,\n          response: { success: false, error: 'recipe_id is required.' }\n        };\n        result;\n      } else if (!text) {\n        var result = {\n          route: 'error',\n          statusCode: 400,\n          response: { success: false, error: 'text is required for adding a comment.' }\n        };\n        result;\n      } else {\n        var result = {\n          route: 'add',\n          user_id: userId,\n          user_name: userName,\n          user_role: userRole,\n          recipe_id: recipeId,\n          text: text,\n          image_url: imageUrl,\n          created_at: new Date().toISOString()\n        };\n        result;\n      }\n    } else if (action === 'delete') {\n      if (!commentId) {\n        var result = {\n          route: 'error',\n          statusCode: 400,\n          response: { success: false, error: 'comment_id is required for delete action.' }\n        };\n        result;\n      } else {\n        var result = {\n          route: 'delete',\n          user_id: userId,\n          user_role: userRole,\n          comment_id: commentId\n        };\n        result;\n      }\n    } else {\n      var result = {\n        route: 'error',\n        statusCode: 400,\n        response: { success: false, error: 'Invalid action.' }\n      };\n      result;\n    }\n  } catch (e) {\n    var result = {\n      route: 'error',\n      statusCode: 401,\n      response: { success: false, error: 'Invalid or expired token.' }\n    };\n    result;\n  }\n}",
+            "language": "javascript",
+            "name": "Verify JWT & Validate Action",
+            "saved": 0,
+            "variable": "auth"
+          }
+        },
+        "description": {
+          "text": "Verify JWT, validate action and required fields"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "auth",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 70
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-auth-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-auth-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 405
+      }
+    },
+    {
+      "id": "cond-action",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "add",
+                "logical_operators": "and"
+              }
+            ],
+            "out_3": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "list",
+                "logical_operators": "and"
+              }
+            ],
+            "out_4": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "delete",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route Action"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "ADD"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_3",
+            "attrs": {
+              "portLabel": {
+                "text": "LIST"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_4",
+            "attrs": {
+              "portLabel": {
+                "text": "DELETE"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 600
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Auth/validation error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{auth.response}}",
+            "responseType": "json",
+            "statusCode": "{{auth.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 772.5
+      }
+    },
+    {
+      "id": "write-add-comment",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "recipe_id",
+                "columnName": "recipe_id",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.recipe_id}}"
+              },
+              {
+                "columnId": "user_id",
+                "columnName": "user_id",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.user_id}}"
+              },
+              {
+                "columnId": "user_name",
+                "columnName": "user_name",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.user_name}}"
+              },
+              {
+                "columnId": "text",
+                "columnName": "text",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.text}}"
+              },
+              {
+                "columnId": "image_url",
+                "columnName": "image_url",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.image_url}}"
+              },
+              {
+                "columnId": "created_at",
+                "columnName": "created_at",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.created_at}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 364,
+            "datasourceName": "Comments",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "insert",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "newComment",
+            "where": []
+          }
+        },
+        "description": {
+          "text": "Insert → Comments"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Add Comment"
+        },
+        "variable": {
+          "text": "newComment",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wac-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wac-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1060,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-format-add",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.newComment || {};\nvar row = data.row || data;\n\nvar result = {\n  success: true,\n  message: 'Comment added successfully.',\n  data: {\n    id: row._id || '',\n    recipe_id: row.recipe_id || '',\n    user_id: row.user_id || '',\n    user_name: row.user_name || '',\n    text: row.text || '',\n    image_url: row.image_url || '',\n    created_at: row.created_at || ''\n  }\n};\nresult;",
+            "language": "javascript",
+            "name": "Format Add Response",
+            "saved": 0,
+            "variable": "addResult"
+          }
+        },
+        "description": {
+          "text": "Format the newly created comment response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "addResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fma-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fma-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-add-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Comment added"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{addResult}}",
+            "responseType": "json",
+            "statusCode": 201
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-aok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-aok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-list-comments",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "recipe_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.recipe_id}}"
+              }
+            ],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [
+              {
+                "columnId": "created_at",
+                "direction": "desc"
+              }
+            ],
+            "topK": 5,
+            "var_datasource": 364,
+            "variable": "commentsList"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Comments by Recipe"
+        },
+        "variable": {
+          "text": "commentsList",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 138
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qlc-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qlc-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-format-list",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.commentsList || {};\nvar rows = data.rows || [];\n\nvar comments = rows.map(function(row) {\n  return {\n    id: row._id || '',\n    recipe_id: row.recipe_id || '',\n    user_id: row.user_id || '',\n    user_name: row.user_name || '',\n    text: row.text || '',\n    image_url: row.image_url || '',\n    created_at: row.created_at || ''\n  };\n});\n\nvar result = {\n  success: true,\n  data: comments,\n  total: comments.length\n};\nresult;",
+            "language": "javascript",
+            "name": "Format Comments List",
+            "saved": 0,
+            "variable": "formatted"
+          }
+        },
+        "description": {
+          "text": "Format comments list response"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "formatted",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fmt-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fmt-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-list-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Comments list"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{formatted}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-lok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-lok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 1150
+      }
+    },
+    {
+      "id": "query-find-comment",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [
+              {
+                "columnId": "_id",
+                "logic": "AND",
+                "operator": "eq",
+                "value": "{{auth.comment_id}}"
+              }
+            ],
+            "limit": 1,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 364,
+            "variable": "foundComment"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Find Comment by ID"
+        },
+        "variable": {
+          "text": "foundComment",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 130
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qfc-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qfc-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-check-owner",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.foundComment || {};\nvar rows = data.rows || [];\nvar a = variables.auth || {};\nvar userId = String(a.user_id || '');\nvar userRole = String(a.user_role || 'user');\n\nif (rows.length === 0) {\n  var result = {\n    allowed: 'no',\n    statusCode: 404,\n    response: { success: false, error: 'Comment not found.' }\n  };\n  result;\n} else {\n  var comment = rows[0];\n  var commentOwnerId = String(comment.user_id || '');\n\n  // Allow delete if user owns the comment or is admin\n  if (commentOwnerId === userId || userRole === 'admin') {\n    var result = { allowed: 'yes' };\n    result;\n  } else {\n    var result = {\n      allowed: 'no',\n      statusCode: 403,\n      response: { success: false, error: 'You can only delete your own comments.' }\n    };\n    result;\n  }\n}",
+            "language": "javascript",
+            "name": "Check Ownership / Admin",
+            "saved": 0,
+            "variable": "ownerCheck"
+          }
+        },
+        "description": {
+          "text": "Verify user owns the comment or is admin"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "ownerCheck",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 118
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-co-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-co-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 890,
+        "y": 955
+      }
+    },
+    {
+      "id": "cond-delete",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{ownerCheck.allowed}}",
+                "condition_operator": "==",
+                "condition_value": "no",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{ownerCheck.allowed}}",
+                "condition_operator": "==",
+                "condition_value": "yes",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Can Delete?"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cd-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "DENIED"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "ALLOWED"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 890,
+        "y": 1155
+      }
+    },
+    {
+      "id": "output-del-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Delete denied"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{ownerCheck.response}}",
+            "responseType": "json",
+            "statusCode": "{{ownerCheck.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-de-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-de-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 360,
+        "y": 1332.5
+      }
+    },
+    {
+      "id": "write-delete-comment",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [],
+            "content": "",
+            "datasourceId": 364,
+            "datasourceName": "Comments",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "delete",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "deletedComment",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.comment_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Delete → Comments"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Delete Comment"
+        },
+        "variable": {
+          "text": "deletedComment",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 155
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wdc-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wdc-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 740,
+        "y": 1320
+      }
+    },
+    {
+      "id": "output-del-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Comment deleted"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Comment deleted successfully.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-dok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-dok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 1515
+      }
+    }
+  ]
+}

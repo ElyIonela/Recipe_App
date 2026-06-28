@@ -1,0 +1,838 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-code",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-parse",
+        "port": "port-parse-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-parse-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-parse",
+        "port": "port-parse-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-action",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-upload",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "file-move",
+        "port": "port-move-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-get",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_3",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "file-read",
+        "port": "port-read-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-move-to-write",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "file-move",
+        "port": "port-move-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-image-url",
+        "port": "port-wiu-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-write-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-image-url",
+        "port": "port-wiu-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-upload-ok",
+        "port": "port-uok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-read-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "file-read",
+        "port": "port-read-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-image",
+        "port": "port-fmt-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fmt-to-output",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-image",
+        "port": "port-fmt-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-image",
+        "port": "port-img-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp72/recipe-image"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": true,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "recipe-image",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 30,
+              "registeredEndpoint": "/api/v1/NTp72/recipe-image",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": true,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger (File Upload)"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 420,
+        "y": 40
+      }
+    },
+    {
+      "id": "code-parse",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var action = String(variables.action || '').toLowerCase().trim();\nvar token = String(variables.token || '').trim();\nvar recipeId = String(variables.recipe_id || '').trim();\nvar imagePath = String(variables.image_path || '').trim();\nvar files = variables.files || [];\n\nif (action === 'get') {\n  // Get image — public, just needs image_path\n  if (!imagePath) {\n    var r = { route:'error', statusCode:400, response:{ success:false, error:'image_path is required.' } }; r;\n  } else {\n    var r = { route:'get', image_path:imagePath }; r;\n  }\n} else if (action === 'upload') {\n  // Upload — requires auth + file + recipe_id\n  if (!token) {\n    var r = { route:'error', statusCode:401, response:{ success:false, error:'Authentication required.' } }; r;\n  } else if (!recipeId) {\n    var r = { route:'error', statusCode:400, response:{ success:false, error:'recipe_id is required.' } }; r;\n  } else if (files.length === 0) {\n    var r = { route:'error', statusCode:400, response:{ success:false, error:'No file uploaded.' } }; r;\n  } else {\n    try {\n      var secret = variables.secrets.my_jwt_secret;\n      var decoded = jwtVerify(token, secret);\n      var userId = String(decoded.sub || '');\n      if (!userId) {\n        var r = { route:'error', statusCode:401, response:{ success:false, error:'Invalid token.' } }; r;\n      } else {\n        var filePath = String(files[0]);\n        var ext = filePath.split('.').pop().toLowerCase();\n        var allowed = ['png','jpg','jpeg','gif','webp'];\n        if (allowed.indexOf(ext) === -1) {\n          var r = { route:'error', statusCode:400, response:{ success:false, error:'Only image files allowed (png, jpg, jpeg, gif, webp).' } }; r;\n        } else {\n          var ts = Date.now();\n          var newPath = '/recipe-images/' + recipeId + '/' + ts + '.' + ext;\n          var r = {\n            route:'upload',\n            user_id: userId,\n            recipe_id: recipeId,\n            file_path: filePath,\n            new_path: newPath,\n            new_path_versioned: newPath + '?v=' + ts\n          }; r;\n        }\n      }\n    } catch(e) {\n      var r = { route:'error', statusCode:401, response:{ success:false, error:'Invalid or expired token.' } }; r;\n    }\n  }\n} else {\n  var r = { route:'error', statusCode:400, response:{ success:false, error:'Invalid action. Must be: upload, get.' } }; r;\n}",
+            "language": "javascript",
+            "name": "Parse & Validate",
+            "saved": 0,
+            "variable": "parsed"
+          }
+        },
+        "description": {
+          "text": "Validate action, auth, file"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "parsed",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 87
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-parse-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-parse-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 210
+      }
+    },
+    {
+      "id": "cond-action",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{parsed.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{parsed.route}}",
+                "condition_operator": "==",
+                "condition_value": "upload",
+                "logical_operators": "and"
+              }
+            ],
+            "out_3": [
+              {
+                "condition": "{{parsed.route}}",
+                "condition_operator": "==",
+                "condition_value": "get",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "UPLOAD"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_3",
+            "attrs": {
+              "portLabel": {
+                "text": "GET"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 405
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{parsed.response}}",
+            "responseType": "json",
+            "statusCode": "{{parsed.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 577.5
+      }
+    },
+    {
+      "id": "file-move",
+      "type": "app.File",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "rename → {{parsed.file_path}}"
+        },
+        "file": {
+          "extra": {
+            "content": "",
+            "create_dirs": true,
+            "destination_path": "{{parsed.new_path}}",
+            "encoding": "utf-8",
+            "file_path": "{{parsed.file_path}}",
+            "on_error": "stop",
+            "operation": "rename",
+            "variable": "moveResult",
+            "write_mode": "overwrite"
+          }
+        },
+        "label": {
+          "text": "Move Image File"
+        },
+        "variable": {
+          "text": "moveResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-move-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-move-out",
+            "attrs": {
+              "portLabel": {
+                "text": "out"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 565
+      }
+    },
+    {
+      "id": "write-image-url",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "image_url",
+                "columnName": "image_url",
+                "columnType": "text",
+                "required": true,
+                "value": "{{parsed.new_path_versioned}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 367,
+            "datasourceName": "Recipes",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "writeResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{parsed.recipe_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Recipes"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Update Recipe Image"
+        },
+        "variable": {
+          "text": "writeResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wiu-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wiu-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-upload-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Upload success"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Image uploaded\", \"image_url\": \"{{parsed.new_path_versioned}}\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-uok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-uok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 955
+      }
+    },
+    {
+      "id": "file-read",
+      "type": "app.File",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "read → {{parsed.image_path}}"
+        },
+        "file": {
+          "extra": {
+            "content": "",
+            "create_dirs": false,
+            "destination_path": "",
+            "encoding": "base64",
+            "file_path": "{{parsed.image_path}}",
+            "on_error": "stop",
+            "operation": "read",
+            "variable": "fileData",
+            "write_mode": "overwrite"
+          }
+        },
+        "label": {
+          "text": "Read Image File"
+        },
+        "variable": {
+          "text": "fileData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 104
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-read-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-read-out",
+            "attrs": {
+              "portLabel": {
+                "text": "out"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 565
+      }
+    },
+    {
+      "id": "code-fmt-image",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var fileContent = variables.fileData;\nvar base64 = '';\nif (typeof fileContent === 'string') {\n  base64 = fileContent;\n} else if (fileContent && typeof fileContent === 'object') {\n  base64 = fileContent.content || fileContent.data || fileContent.base64 || fileContent.body || '';\n}\nif (base64.indexOf('data:') === 0) {\n  var ci = base64.indexOf(',');\n  if (ci !== -1) base64 = base64.substring(ci + 1);\n}\nbase64 = String(base64).replace(/\\s/g, '');\n\nvar path = String(variables.parsed.image_path || '').toLowerCase();\nvar mime = 'image/jpeg';\nif (path.indexOf('.png') !== -1) mime = 'image/png';\nelse if (path.indexOf('.gif') !== -1) mime = 'image/gif';\nelse if (path.indexOf('.webp') !== -1) mime = 'image/webp';\n\nvar result = { base64: 'data:' + mime + ';base64,' + base64, mimeType: mime };\nresult;",
+            "language": "javascript",
+            "name": "Format Image",
+            "saved": 0,
+            "variable": "imageResponse"
+          }
+        },
+        "description": {
+          "text": "Build data URI from base64"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "imageResponse",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 138
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fmt-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fmt-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-image",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "pulsing-opacity",
+          "opacity": "1",
+          "stroke": "#ffffff"
+        },
+        "description": {
+          "text": "Image data"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"image\": \"{{imageResponse.base64}}\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-img-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-img-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 210,
+        "y": 955
+      }
+    }
+  ]
+}

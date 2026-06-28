@@ -1,0 +1,201 @@
+{
+  "cells": [
+    {
+      "id": "0ff02dd9-4edc-40dd-a6c9-9e0dc171dbdd",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Ctrl + Enter to run"
+        },
+        "flowStart": {
+          "extra": {
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "api-key",
+              "corsOrigins": [],
+              "customPath": "",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 60,
+              "registeredEndpoint": "",
+              "requireAuth": true,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "manual",
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "label": {
+          "text": "Flow Start"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "17fcfecf-8c82-4f49-8203-1a5086e76dfa",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 13,
+        "y": 13
+      }
+    },
+    {
+      "id": "d8eb1d14-57a7-4123-af66-680682bbdcb0",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "0ff02dd9-4edc-40dd-a6c9-9e0dc171dbdd",
+        "port": "17fcfecf-8c82-4f49-8203-1a5086e76dfa",
+        "magnet": ""
+      },
+      "target": {
+        "id": "4e8f5ade-560f-4197-bfa9-3bab162d3a6e",
+        "port": "82022360-cc1f-4069-a83b-b3dfa0f07910",
+        "magnet": ""
+      }
+    },
+    {
+      "id": "4e8f5ade-560f-4197-bfa9-3bab162d3a6e",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [],
+            "topK": 5,
+            "var_datasource": 368,
+            "variable": "queryData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Data"
+        },
+        "variable": {
+          "text": "queryData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 112.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "82022360-cc1f-4069-a83b-b3dfa0f07910",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "5dbe9a44-a509-47b6-a65f-0f9176a170ec",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": -27,
+        "y": 163
+      }
+    }
+  ]
+}
