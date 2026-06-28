@@ -1,0 +1,1123 @@
+{
+  "cells": [
+    {
+      "id": "link-start-to-mapper",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "flow-start",
+        "port": "port-start-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "data-mapper",
+        "port": "port-mapper-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-mapper-to-auth",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "data-mapper",
+        "port": "port-mapper-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-auth",
+        "port": "port-auth-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-auth-to-cond",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-auth",
+        "port": "port-auth-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "cond-action",
+        "port": "port-cond-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-error",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_1",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-error",
+        "port": "port-err-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-list",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_2",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "query-categories",
+        "port": "port-qc-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-add",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_3",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-add",
+        "port": "port-wa-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-edit",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_4",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-edit",
+        "port": "port-we-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-cond-delete",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "cond-action",
+        "port": "out_5",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "write-delete",
+        "port": "port-wd-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-qc-to-fmt",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "query-categories",
+        "port": "port-qc-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "code-fmt-list",
+        "port": "port-fl-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-fl-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "code-fmt-list",
+        "port": "port-fl-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-list",
+        "port": "port-ol-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wa-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-add",
+        "port": "port-wa-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-ok",
+        "port": "port-ok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-we-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-edit",
+        "port": "port-we-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-ok",
+        "port": "port-ok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "link-wd-to-out",
+      "type": "app.Link",
+      "ports": {
+        "items": null
+      },
+      "source": {
+        "id": "write-delete",
+        "port": "port-wd-out",
+        "magnet": "portBody"
+      },
+      "target": {
+        "id": "output-ok",
+        "port": "port-ok-in",
+        "magnet": "portBody"
+      }
+    },
+    {
+      "id": "flow-start",
+      "type": "app.FlowchartStart",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "/api/v1/NTp7i/categories"
+        },
+        "flowStart": {
+          "extra": {
+            "allowFileUpload": false,
+            "apiConfig": {
+              "allowedMethods": [
+                "POST"
+              ],
+              "authType": "none",
+              "corsOrigins": [
+                "*"
+              ],
+              "customPath": "categories",
+              "ipWhitelist": [],
+              "jwtAlgorithm": "HS256",
+              "jwtSecret": "",
+              "rateLimitPerMinute": 60,
+              "registeredEndpoint": "/api/v1/NTp7i/categories",
+              "requireAuth": false,
+              "timeout": 30
+            },
+            "chatConfig": {
+              "allowFileUpload": false,
+              "allowImageUpload": false,
+              "allowVoiceInput": false,
+              "capabilities": {
+                "deepThinking": false,
+                "generateImages": false,
+                "webSearch": false
+              },
+              "customProperties": [],
+              "placeholderText": "",
+              "suggestedPrompts": [],
+              "welcomeMessage": ""
+            },
+            "cronConfig": {
+              "customCron": "0 * * * *",
+              "dayOfMonth": 1,
+              "dayOfWeek": 1,
+              "frequency": "hourly",
+              "interval": 1,
+              "time": "00:00"
+            },
+            "manualInput": "{\n  \n}",
+            "scheduleConfig": {
+              "dayOfMonth": 1,
+              "days": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+              ],
+              "daysOfMonth": [
+                1
+              ],
+              "hour": 9,
+              "intervalUnit": "minutes",
+              "intervalValue": 30,
+              "minute": 0,
+              "mode": "specific",
+              "period": "AM",
+              "repeatType": "weekly",
+              "timezone": "auto"
+            },
+            "triggerType": "api",
+            "webhookConfig": {},
+            "websocketConfig": {
+              "broadcastMode": "others",
+              "customPath": "",
+              "idleTimeoutSeconds": 300,
+              "maxConcurrentRooms": 10,
+              "maxPeersPerRoom": 2,
+              "registeredEndpoint": "",
+              "requireAuth": true
+            }
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/trigger-webhook.svg"
+        },
+        "label": {
+          "text": "API Trigger"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "out",
+            "id": "port-start-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 160
+      },
+      "position": {
+        "x": 760,
+        "y": 40
+      }
+    },
+    {
+      "id": "data-mapper",
+      "type": "app.DataMapper",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "dataMapper": {
+          "extra": {
+            "template": "{\n  \"token\": \"{{token}}\",\n  \"action\": \"{{action}}\",\n  \"category_id\": \"{{category_id}}\",\n  \"name\": \"{{name}}\",\n  \"icon\": \"{{icon}}\",\n  \"sort_order\": \"{{sort_order}}\"\n}",
+            "variable": "mapper"
+          }
+        },
+        "description": {
+          "text": "Extract all fields"
+        },
+        "provider": {
+          "text": "Data Mapper"
+        },
+        "variable": {
+          "text": "mapper",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 80
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-mapper-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-mapper-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 210
+      }
+    },
+    {
+      "id": "code-auth",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var m = variables.mapper || {};\nvar token = String(m.token || '').trim();\nvar action = String(m.action || '').toLowerCase().trim();\nvar catId = String(m.category_id || '').trim();\n\nif (!action) action = 'list';\nvar validActions = ['list', 'add', 'edit', 'delete'];\n\nif (validActions.indexOf(action) === -1) {\n  var r = { route:'error', statusCode:400, response:{ success:false, error:'Invalid action. Must be: list, add, edit, delete.' } }; r;\n} else if (action === 'list') {\n  var r = { route:'list' }; r;\n} else {\n  if (!token) {\n    var r = { route:'error', statusCode:401, response:{ success:false, error:'Authentication required.' } }; r;\n  } else {\n    try {\n      var secret = variables.secrets.my_jwt_secret;\n      var decoded = jwtVerify(token, secret);\n      var userRole = String(decoded.role || 'user');\n      if (userRole !== 'admin') {\n        var r = { route:'error', statusCode:403, response:{ success:false, error:'Admin access required.' } }; r;\n      } else if (action === 'add') {\n        var name = String(m.name || '').trim();\n        if (!name) {\n          var r = { route:'error', statusCode:400, response:{ success:false, error:'name is required.' } }; r;\n        } else {\n          var r = { route:'add', name:name, icon:String(m.icon||'').trim(), sort_order:Number(m.sort_order)||0 }; r;\n        }\n      } else if (action === 'edit') {\n        if (!catId) {\n          var r = { route:'error', statusCode:400, response:{ success:false, error:'category_id is required.' } }; r;\n        } else {\n          var r = { route:'edit', category_id:catId, name:String(m.name||'').trim(), icon:String(m.icon||'').trim(), sort_order:Number(m.sort_order)||0 }; r;\n        }\n      } else if (action === 'delete') {\n        if (!catId) {\n          var r = { route:'error', statusCode:400, response:{ success:false, error:'category_id is required.' } }; r;\n        } else {\n          var r = { route:'delete', category_id:catId }; r;\n        }\n      } else {\n        var r = { route:'error', statusCode:400, response:{ success:false, error:'Unknown action.' } }; r;\n      }\n    } catch(e) {\n      var r = { route:'error', statusCode:401, response:{ success:false, error:'Invalid or expired token.' } }; r;\n    }\n  }\n}",
+            "language": "javascript",
+            "name": "Auth & Route",
+            "saved": 0,
+            "variable": "auth"
+          }
+        },
+        "description": {
+          "text": "Validate action, admin auth"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "auth",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 70
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-auth-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-auth-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 405
+      }
+    },
+    {
+      "id": "cond-action",
+      "type": "app.Condition",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "condition": {
+          "extra": {
+            "out_1": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "error",
+                "logical_operators": "and"
+              }
+            ],
+            "out_2": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "list",
+                "logical_operators": "and"
+              }
+            ],
+            "out_3": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "add",
+                "logical_operators": "and"
+              }
+            ],
+            "out_4": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "edit",
+                "logical_operators": "and"
+              }
+            ],
+            "out_5": [
+              {
+                "condition": "{{auth.route}}",
+                "condition_operator": "==",
+                "condition_value": "delete",
+                "logical_operators": "and"
+              }
+            ]
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/condition_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Route"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-cond-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "out_1",
+            "attrs": {
+              "portLabel": {
+                "text": "ERROR"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_2",
+            "attrs": {
+              "portLabel": {
+                "text": "LIST"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_3",
+            "attrs": {
+              "portLabel": {
+                "text": "ADD"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_4",
+            "attrs": {
+              "portLabel": {
+                "text": "EDIT"
+              }
+            }
+          },
+          {
+            "group": "out",
+            "id": "out_5",
+            "attrs": {
+              "portLabel": {
+                "text": "DELETE"
+              }
+            }
+          }
+        ]
+      },
+      "size": {
+        "height": 80,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 600
+      }
+    },
+    {
+      "id": "output-error",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Error"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{auth.response}}",
+            "responseType": "json",
+            "statusCode": "{{auth.statusCode}}"
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-err-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-err-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 40,
+        "y": 772.5
+      }
+    },
+    {
+      "id": "query-categories",
+      "type": "app.DataSources",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasource": {
+          "extra": {
+            "columns": [],
+            "dictionaryKeyColumn": "",
+            "dictionaryValueColumn": "",
+            "filters": [],
+            "limit": 100,
+            "naturalQuery": "",
+            "offset": 0,
+            "outputFormat": "list",
+            "query": "",
+            "queryMode": "structured",
+            "reveal_secrets": false,
+            "searchType": "similarity",
+            "similarityThreshold": 0.7,
+            "sort": [
+              {
+                "columnId": "sort_order",
+                "direction": "asc"
+              }
+            ],
+            "topK": 5,
+            "var_datasource": 363,
+            "variable": "categoriesData"
+          }
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/database_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        },
+        "label": {
+          "text": "Query Categories"
+        },
+        "variable": {
+          "text": "categoriesData",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 155
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-qc-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-qc-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1400,
+        "y": 760
+      }
+    },
+    {
+      "id": "code-fmt-list",
+      "type": "app.CodeJS",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "codeJs": {
+          "extra": {
+            "code": "var data = variables.categoriesData || {};\nvar rows = data.rows || [];\nvar result = { success:true, data:rows }; result;",
+            "language": "javascript",
+            "name": "Format List",
+            "saved": 0,
+            "variable": "fmtList"
+          }
+        },
+        "description": {
+          "text": "Format list"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/code.svg"
+        },
+        "variable": {
+          "text": "fmtList",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 84
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-fl-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-fl-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 890,
+        "y": 955
+      }
+    },
+    {
+      "id": "output-list",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Categories list"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{{fmtList}}",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ol-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ol-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 1150
+      }
+    },
+    {
+      "id": "write-add",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "name",
+                "columnName": "name",
+                "columnType": "text",
+                "required": true,
+                "value": "{{auth.name}}"
+              },
+              {
+                "columnId": "icon",
+                "columnName": "icon",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.icon}}"
+              },
+              {
+                "columnId": "sort_order",
+                "columnName": "sort_order",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.sort_order}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 363,
+            "datasourceName": "Categories",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "insert",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "writeResult",
+            "where": []
+          }
+        },
+        "description": {
+          "text": "Insert → Categories"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Add Category"
+        },
+        "variable": {
+          "text": "writeResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 129.5
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wa-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wa-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 380,
+        "y": 760
+      }
+    },
+    {
+      "id": "write-edit",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [
+              {
+                "columnId": "name",
+                "columnName": "name",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.name}}"
+              },
+              {
+                "columnId": "icon",
+                "columnName": "icon",
+                "columnType": "text",
+                "required": false,
+                "value": "{{auth.icon}}"
+              },
+              {
+                "columnId": "sort_order",
+                "columnName": "sort_order",
+                "columnType": "number",
+                "required": false,
+                "value": "{{auth.sort_order}}"
+              }
+            ],
+            "content": "",
+            "datasourceId": 363,
+            "datasourceName": "Categories",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "update",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": true
+            },
+            "variable": "editResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.category_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Update → Categories"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Edit Category"
+        },
+        "variable": {
+          "text": "editResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 121
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-we-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-we-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 720,
+        "y": 760
+      }
+    },
+    {
+      "id": "write-delete",
+      "type": "app.DatasourceWrite",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "datasourceWrite": {
+          "extra": {
+            "columnMapping": [],
+            "content": "",
+            "datasourceId": 363,
+            "datasourceName": "Categories",
+            "datasourceType": "table",
+            "matchColumns": [],
+            "metadata": {},
+            "operation": "delete",
+            "options": {
+              "embedImmediately": false,
+              "returnRow": false
+            },
+            "variable": "deleteResult",
+            "where": [
+              {
+                "column": "_id",
+                "columnId": "_id",
+                "operator": "eq",
+                "value": "{{auth.category_id}}"
+              }
+            ]
+          }
+        },
+        "description": {
+          "text": "Delete → Categories"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/datasource-write.svg"
+        },
+        "label": {
+          "text": "Delete Category"
+        },
+        "variable": {
+          "text": "deleteResult",
+          "visibility": "visible"
+        },
+        "variableBg": {
+          "visibility": "visible",
+          "width": 138
+        },
+        "variableIcon": {
+          "visibility": "visible"
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-wd-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-wd-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 115,
+        "width": 240
+      },
+      "position": {
+        "x": 1060,
+        "y": 760
+      }
+    },
+    {
+      "id": "output-ok",
+      "type": "app.SimpleOutput",
+      "attrs": {
+        "body": {
+          "class": "",
+          "opacity": "1",
+          "stroke": "#4A4A51"
+        },
+        "description": {
+          "text": "Success"
+        },
+        "icon": {
+          "xlinkHref": "./assets/images/dia/simple_output.svg"
+        },
+        "simpleoutput": {
+          "extra": {
+            "output": "{ \"success\": true, \"message\": \"Done.\" }",
+            "responseType": "json",
+            "statusCode": 200
+          }
+        }
+      },
+      "ports": {
+        "items": [
+          {
+            "group": "in",
+            "id": "port-ok-in",
+            "attrs": null
+          },
+          {
+            "group": "out",
+            "id": "port-ok-out",
+            "attrs": null
+          }
+        ]
+      },
+      "size": {
+        "height": 90,
+        "width": 240
+      },
+      "position": {
+        "x": 550,
+        "y": 967.5
+      }
+    }
+  ]
+}
